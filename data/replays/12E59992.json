@@ -1,0 +1,388 @@
+{
+  "room_id": "12E59992",
+  "players": [
+    "satu",
+    "dua"
+  ],
+  "started_at": 1780357637.31137,
+  "events": [
+    {
+      "event": "GAME_START",
+      "ts": 1780357637.311372,
+      "elapsed": 0.0,
+      "players": [
+        "satu",
+        "dua"
+      ]
+    },
+    {
+      "event": "QUESTION",
+      "ts": 1780357639.3122616,
+      "elapsed": 2.001,
+      "index": 0,
+      "question_id": 19,
+      "question_text": "Berapa byte header minimal dari sebuah paket UDP?"
+    },
+    {
+      "event": "ANSWER",
+      "ts": 1780357656.8080428,
+      "elapsed": 19.497,
+      "username": "dua",
+      "question_index": 0,
+      "answer": "A",
+      "correct": false,
+      "points": 0,
+      "scores": {
+        "satu": 0,
+        "dua": 0
+      }
+    },
+    {
+      "event": "ANSWER",
+      "ts": 1780357657.7865794,
+      "elapsed": 20.475,
+      "username": "satu",
+      "question_index": 0,
+      "answer": "C",
+      "correct": false,
+      "points": 0,
+      "scores": {
+        "satu": 0,
+        "dua": 0
+      }
+    },
+    {
+      "event": "QUESTION",
+      "ts": 1780357660.787596,
+      "elapsed": 23.476,
+      "index": 1,
+      "question_id": 18,
+      "question_text": "Manakah cara yang benar untuk membuka file di Python dalam mode baca?"
+    },
+    {
+      "event": "ANSWER",
+      "ts": 1780357671.8783574,
+      "elapsed": 34.567,
+      "username": "dua",
+      "question_index": 1,
+      "answer": "A",
+      "correct": false,
+      "points": 0,
+      "scores": {
+        "satu": 0,
+        "dua": 0
+      }
+    },
+    {
+      "event": "ANSWER",
+      "ts": 1780357672.8894413,
+      "elapsed": 35.578,
+      "username": "satu",
+      "question_index": 1,
+      "answer": "A",
+      "correct": false,
+      "points": 0,
+      "scores": {
+        "satu": 0,
+        "dua": 0
+      }
+    },
+    {
+      "event": "QUESTION",
+      "ts": 1780357675.8904266,
+      "elapsed": 38.579,
+      "index": 2,
+      "question_id": 3,
+      "question_text": "Apa hasil dari: len('Hello World')?"
+    },
+    {
+      "event": "ANSWER",
+      "ts": 1780357690.698266,
+      "elapsed": 53.387,
+      "username": "dua",
+      "question_index": 2,
+      "answer": "A",
+      "correct": false,
+      "points": 0,
+      "scores": {
+        "satu": 0,
+        "dua": 0
+      }
+    },
+    {
+      "event": "TIMEOUT",
+      "ts": 1780357695.8915079,
+      "elapsed": 58.58,
+      "question_index": 2
+    },
+    {
+      "event": "ANSWER",
+      "ts": 1780357696.0074859,
+      "elapsed": 58.696,
+      "username": "satu",
+      "question_index": 2,
+      "answer": "B",
+      "correct": true,
+      "points": 100,
+      "scores": {
+        "satu": 100,
+        "dua": 0
+      }
+    },
+    {
+      "event": "QUESTION",
+      "ts": 1780357699.0085342,
+      "elapsed": 61.697,
+      "index": 3,
+      "question_id": 4,
+      "question_text": "Tipe data apa yang digunakan untuk menyimpan pasangan key-value di Python?"
+    },
+    {
+      "event": "ANSWER",
+      "ts": 1780357706.671323,
+      "elapsed": 69.36,
+      "username": "dua",
+      "question_index": 3,
+      "answer": "B",
+      "correct": false,
+      "points": 0,
+      "scores": {
+        "satu": 100,
+        "dua": 0
+      }
+    },
+    {
+      "event": "ANSWER",
+      "ts": 1780357711.6455932,
+      "elapsed": 74.334,
+      "username": "satu",
+      "question_index": 3,
+      "answer": "B",
+      "correct": false,
+      "points": 0,
+      "scores": {
+        "satu": 100,
+        "dua": 0
+      }
+    },
+    {
+      "event": "QUESTION",
+      "ts": 1780357714.6467938,
+      "elapsed": 77.335,
+      "index": 4,
+      "question_id": 9,
+      "question_text": "Model OSI terdiri dari berapa layer?"
+    },
+    {
+      "event": "ANSWER",
+      "ts": 1780357723.4518943,
+      "elapsed": 86.141,
+      "username": "dua",
+      "question_index": 4,
+      "answer": "D",
+      "correct": false,
+      "points": 0,
+      "scores": {
+        "satu": 100,
+        "dua": 0
+      }
+    },
+    {
+      "event": "TIMEOUT",
+      "ts": 1780357734.647814,
+      "elapsed": 97.336,
+      "question_index": 4
+    },
+    {
+      "event": "QUESTION",
+      "ts": 1780357737.6487648,
+      "elapsed": 100.337,
+      "index": 5,
+      "question_id": 10,
+      "question_text": "Socket programming menggunakan fungsi apa untuk menerima koneksi masuk?"
+    },
+    {
+      "event": "ANSWER",
+      "ts": 1780357751.931198,
+      "elapsed": 114.62,
+      "username": "dua",
+      "question_index": 5,
+      "answer": "D",
+      "correct": true,
+      "points": 150,
+      "scores": {
+        "satu": 100,
+        "dua": 150
+      }
+    },
+    {
+      "event": "ANSWER",
+      "ts": 1780357754.2177188,
+      "elapsed": 116.906,
+      "username": "satu",
+      "question_index": 5,
+      "answer": "D",
+      "correct": true,
+      "points": 150,
+      "scores": {
+        "satu": 250,
+        "dua": 150
+      }
+    },
+    {
+      "event": "QUESTION",
+      "ts": 1780357757.2188792,
+      "elapsed": 119.908,
+      "index": 6,
+      "question_id": 1,
+      "question_text": "Apa output dari: print(type([]))?"
+    },
+    {
+      "event": "ANSWER",
+      "ts": 1780357773.2984464,
+      "elapsed": 135.987,
+      "username": "satu",
+      "question_index": 6,
+      "answer": "D",
+      "correct": false,
+      "points": 0,
+      "scores": {
+        "satu": 250,
+        "dua": 150
+      }
+    },
+    {
+      "event": "ANSWER",
+      "ts": 1780357775.597465,
+      "elapsed": 138.286,
+      "username": "dua",
+      "question_index": 6,
+      "answer": "D",
+      "correct": false,
+      "points": 0,
+      "scores": {
+        "satu": 250,
+        "dua": 150
+      }
+    },
+    {
+      "event": "QUESTION",
+      "ts": 1780357778.5984204,
+      "elapsed": 141.287,
+      "index": 7,
+      "question_id": 13,
+      "question_text": "Manakah algoritma sorting dengan kompleksitas rata-rata O(n log n)?"
+    },
+    {
+      "event": "ANSWER",
+      "ts": 1780357792.5653825,
+      "elapsed": 155.254,
+      "username": "satu",
+      "question_index": 7,
+      "answer": "C",
+      "correct": true,
+      "points": 200,
+      "scores": {
+        "satu": 450,
+        "dua": 150
+      }
+    },
+    {
+      "event": "ANSWER",
+      "ts": 1780357794.168966,
+      "elapsed": 156.858,
+      "username": "dua",
+      "question_index": 7,
+      "answer": "C",
+      "correct": true,
+      "points": 200,
+      "scores": {
+        "satu": 450,
+        "dua": 350
+      }
+    },
+    {
+      "event": "QUESTION",
+      "ts": 1780357797.1700125,
+      "elapsed": 159.859,
+      "index": 8,
+      "question_id": 6,
+      "question_text": "Protokol apa yang menjamin pengiriman data secara berurutan dan reliable?"
+    },
+    {
+      "event": "ANSWER",
+      "ts": 1780357808.3008945,
+      "elapsed": 170.99,
+      "username": "dua",
+      "question_index": 8,
+      "answer": "C",
+      "correct": true,
+      "points": 150,
+      "scores": {
+        "satu": 450,
+        "dua": 500
+      }
+    },
+    {
+      "event": "ANSWER",
+      "ts": 1780357810.5181305,
+      "elapsed": 173.207,
+      "username": "satu",
+      "question_index": 8,
+      "answer": "C",
+      "correct": true,
+      "points": 150,
+      "scores": {
+        "satu": 600,
+        "dua": 500
+      }
+    },
+    {
+      "event": "QUESTION",
+      "ts": 1780357813.519124,
+      "elapsed": 176.208,
+      "index": 9,
+      "question_id": 11,
+      "question_text": "Struktur data mana yang menggunakan prinsip FIFO?"
+    },
+    {
+      "event": "ANSWER",
+      "ts": 1780357832.2438107,
+      "elapsed": 194.932,
+      "username": "satu",
+      "question_index": 9,
+      "answer": "A",
+      "correct": false,
+      "points": 0,
+      "scores": {
+        "satu": 600,
+        "dua": 500
+      }
+    },
+    {
+      "event": "ANSWER",
+      "ts": 1780357833.3167622,
+      "elapsed": 196.005,
+      "username": "dua",
+      "question_index": 9,
+      "answer": "A",
+      "correct": false,
+      "points": 0,
+      "scores": {
+        "satu": 600,
+        "dua": 500
+      }
+    },
+    {
+      "event": "GAME_OVER",
+      "ts": 1780357836.3178277,
+      "elapsed": 199.006,
+      "winner": "satu",
+      "scores": {
+        "satu": 600,
+        "dua": 500
+      },
+      "reason": "all_questions_done"
+    }
+  ]
+}

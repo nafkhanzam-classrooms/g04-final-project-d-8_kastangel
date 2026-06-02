@@ -1,0 +1,100 @@
+[2026-06-02 06:38:02] INFO     START_GAME | room=TEST  players=['alice', 'bob']
+[2026-06-02 06:38:03] INFO     START_GAME | room=TEST  players=['alice', 'bob']
+[2026-06-02 06:38:05] INFO     ANSWER     | user='alice'              room=TEST  q=0  CORRECT  pts=+100
+[2026-06-02 06:38:06] INFO     START_GAME | room=TEST  players=['alice', 'bob']
+[2026-06-02 06:38:08] INFO     ANSWER     | user='alice'              room=TEST  q=0  WRONG    pts=+0
+[2026-06-02 06:38:08] INFO     START_GAME | room=TEST  players=['alice', 'bob']
+[2026-06-02 06:38:11] INFO     ANSWER     | user='alice'              room=TEST  q=0  CORRECT  pts=+100
+[2026-06-02 06:38:11] INFO     START_GAME | room=TEST  players=['alice', 'bob']
+[2026-06-02 06:38:13] INFO     START_GAME | room=TEST  players=['alice', 'bob']
+[2026-06-02 06:38:16] INFO     ANSWER     | user='alice'              room=TEST  q=0  CORRECT  pts=+100
+[2026-06-02 06:38:16] INFO     ANSWER     | user='bob'                room=TEST  q=0  WRONG    pts=+0
+[2026-06-02 06:38:19] INFO     ANSWER     | user='alice'              room=TEST  q=1  CORRECT  pts=+100
+[2026-06-02 06:38:19] INFO     ANSWER     | user='bob'                room=TEST  q=1  CORRECT  pts=+100
+[2026-06-02 06:38:22] INFO     GAME_OVER  | room=TEST  winner='alice'  scores={'alice': 200, 'bob': 100}
+[2026-06-02 06:38:23] INFO     START_GAME | room=TEST  players=['alice', 'bob']
+[2026-06-02 06:38:25] INFO     ANSWER     | user='alice'              room=TEST  q=0  CORRECT  pts=+100
+[2026-06-02 06:38:25] INFO     ANSWER     | user='bob'                room=TEST  q=0  WRONG    pts=+0
+[2026-06-02 06:38:29] INFO     ANSWER     | user='alice'              room=TEST  q=1  CORRECT  pts=+100
+[2026-06-02 06:38:29] INFO     ANSWER     | user='bob'                room=TEST  q=1  WRONG    pts=+0
+[2026-06-02 06:38:32] INFO     GAME_OVER  | room=TEST  winner='alice'  scores={'alice': 200, 'bob': 0}
+[2026-06-02 06:38:33] INFO     MATCHMAKE  | user='alice'              entered queue
+[2026-06-02 06:38:33] INFO     MATCHMAKE  | user='alice'              entered queue
+[2026-06-02 06:38:33] INFO     MATCHMAKE  | user='alice'              entered queue
+[2026-06-02 06:38:33] INFO     MATCHMAKE  | user='bob'                entered queue
+[2026-06-02 06:38:33] INFO     MATCHED    | room=CEE9B80A  'alice' vs 'bob'
+[2026-06-02 06:38:33] INFO     START_GAME | room=CEE9B80A  players=['alice', 'bob']
+[2026-06-02 06:38:33] INFO     MATCHMAKE  | user='solo'               entered queue
+[2026-06-02 06:41:40] INFO     Loaded 20 questions from bank.
+[2026-06-02 06:41:40] INFO     CodeDuel server listening on 0.0.0.0:9000
+[2026-06-02 06:41:47] INFO     Server shutting down.
+[2026-06-02 06:41:55] INFO     Loaded 20 questions from bank.
+[2026-06-02 06:41:55] INFO     CodeDuel server listening on 0.0.0.0:9000
+[2026-06-02 06:42:20] INFO     New connection from ('192.168.100.239', 57042) | active=0
+[2026-06-02 06:42:20] WARNING  INVALID_PKT| addr=('192.168.100.239', 57042)  reason='JSON parse error'  raw='GET / HTTP/1.1'
+[2026-06-02 06:42:20] WARNING  INVALID_PKT| addr=('192.168.100.239', 57042)  reason='JSON parse error'  raw='Host: 192.168.100.239:9000'
+[2026-06-02 06:42:20] WARNING  INVALID_PKT| addr=('192.168.100.239', 57042)  reason='JSON parse error'  raw='Connection: keep-alive'
+[2026-06-02 06:42:20] WARNING  INVALID_PKT| addr=('192.168.100.239', 57042)  reason='JSON parse error'  raw='Upgrade-Insecure-Requests: 1'
+[2026-06-02 06:42:20] WARNING  INVALID_PKT| addr=('192.168.100.239', 57042)  reason='JSON parse error'  raw='User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36'
+[2026-06-02 06:42:20] WARNING  INVALID_PKT| addr=('192.168.100.239', 57042)  reason='JSON parse error'  raw='Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8'
+[2026-06-02 06:42:20] WARNING  INVALID_PKT| addr=('192.168.100.239', 57042)  reason='JSON parse error'  raw='Sec-GPC: 1'
+[2026-06-02 06:42:20] WARNING  INVALID_PKT| addr=('192.168.100.239', 57042)  reason='JSON parse error'  raw='Accept-Language: en-US,en;q=0.6'
+[2026-06-02 06:42:20] WARNING  INVALID_PKT| addr=('192.168.100.239', 57042)  reason='JSON parse error'  raw='Accept-Encoding: gzip, deflate'
+[2026-06-02 06:42:20] INFO     DISCONNECT | user="('192.168.100.239', 57042)" addr=('192.168.100.239', 57042)
+[2026-06-02 06:42:22] INFO     New connection from ('192.168.100.239', 57044) | active=0
+[2026-06-02 06:42:22] WARNING  INVALID_PKT| addr=('192.168.100.239', 57044)  reason='JSON parse error'  raw='GET / HTTP/1.1'
+[2026-06-02 06:42:22] WARNING  INVALID_PKT| addr=('192.168.100.239', 57044)  reason='JSON parse error'  raw='Host: 192.168.100.239:9000'
+[2026-06-02 06:42:22] WARNING  INVALID_PKT| addr=('192.168.100.239', 57044)  reason='JSON parse error'  raw='Connection: keep-alive'
+[2026-06-02 06:42:22] WARNING  INVALID_PKT| addr=('192.168.100.239', 57044)  reason='JSON parse error'  raw='Cache-Control: max-age=0'
+[2026-06-02 06:42:22] WARNING  INVALID_PKT| addr=('192.168.100.239', 57044)  reason='JSON parse error'  raw='Upgrade-Insecure-Requests: 1'
+[2026-06-02 06:42:22] WARNING  INVALID_PKT| addr=('192.168.100.239', 57044)  reason='JSON parse error'  raw='User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36'
+[2026-06-02 06:42:22] WARNING  INVALID_PKT| addr=('192.168.100.239', 57044)  reason='JSON parse error'  raw='Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8'
+[2026-06-02 06:42:22] WARNING  INVALID_PKT| addr=('192.168.100.239', 57044)  reason='JSON parse error'  raw='Sec-GPC: 1'
+[2026-06-02 06:42:22] WARNING  INVALID_PKT| addr=('192.168.100.239', 57044)  reason='JSON parse error'  raw='Accept-Language: en-US,en;q=0.6'
+[2026-06-02 06:42:22] WARNING  INVALID_PKT| addr=('192.168.100.239', 57044)  reason='JSON parse error'  raw='Accept-Encoding: gzip, deflate'
+[2026-06-02 06:42:22] INFO     DISCONNECT | user="('192.168.100.239', 57044)" addr=('192.168.100.239', 57044)
+[2026-06-02 06:42:42] INFO     New connection from ('127.0.0.1', 43494) | active=0
+[2026-06-02 06:42:47] INFO     LOGIN      | user='yukakeren'          addr=('127.0.0.1', 43494)
+[2026-06-02 06:42:47] INFO     DISCONNECT | user='yukakeren'          addr=('127.0.0.1', 43494)
+[2026-06-02 06:43:01] INFO     New connection from ('127.0.0.1', 45294) | active=0
+[2026-06-02 06:43:05] INFO     LOGIN      | user='ata'                addr=('127.0.0.1', 45294)
+[2026-06-02 06:43:05] INFO     DISCONNECT | user='ata'                addr=('127.0.0.1', 45294)
+[2026-06-02 06:43:21] INFO     New connection from ('127.0.0.1', 33676) | active=0
+[2026-06-02 06:43:23] INFO     LOGIN      | user='ata'                addr=('127.0.0.1', 33676)
+[2026-06-02 06:43:23] INFO     DISCONNECT | user='ata'                addr=('127.0.0.1', 33676)
+[2026-06-02 06:45:03] INFO     Server shutting down.
+[2026-06-02 06:46:40] INFO     Loaded 20 questions from bank.
+[2026-06-02 06:46:40] INFO     CodeDuel server listening on 0.0.0.0:9000
+[2026-06-02 06:46:48] INFO     New connection from ('127.0.0.1', 58752) | active=0
+[2026-06-02 06:46:55] INFO     LOGIN      | user='satu'               addr=('127.0.0.1', 58752)
+[2026-06-02 06:46:59] INFO     New connection from ('127.0.0.1', 34648) | active=1
+[2026-06-02 06:47:01] INFO     LOGIN      | user='dua'                addr=('127.0.0.1', 34648)
+[2026-06-02 06:47:13] INFO     MATCHMAKE  | user='satu'               entered queue
+[2026-06-02 06:47:17] INFO     MATCHMAKE  | user='dua'                entered queue
+[2026-06-02 06:47:17] INFO     MATCHED    | room=12E59992  'satu' vs 'dua'
+[2026-06-02 06:47:17] INFO     START_GAME | room=12E59992  players=['satu', 'dua']
+[2026-06-02 06:47:36] INFO     ANSWER     | user='dua'                room=12E59992  q=0  WRONG    pts=+0
+[2026-06-02 06:47:37] INFO     ANSWER     | user='satu'               room=12E59992  q=0  WRONG    pts=+0
+[2026-06-02 06:47:51] INFO     ANSWER     | user='dua'                room=12E59992  q=1  WRONG    pts=+0
+[2026-06-02 06:47:52] INFO     ANSWER     | user='satu'               room=12E59992  q=1  WRONG    pts=+0
+[2026-06-02 06:48:10] INFO     ANSWER     | user='dua'                room=12E59992  q=2  WRONG    pts=+0
+[2026-06-02 06:48:16] INFO     ANSWER     | user='satu'               room=12E59992  q=2  CORRECT  pts=+100
+[2026-06-02 06:48:26] INFO     ANSWER     | user='dua'                room=12E59992  q=3  WRONG    pts=+0
+[2026-06-02 06:48:31] INFO     ANSWER     | user='satu'               room=12E59992  q=3  WRONG    pts=+0
+[2026-06-02 06:48:43] INFO     ANSWER     | user='dua'                room=12E59992  q=4  WRONG    pts=+0
+[2026-06-02 06:49:11] INFO     ANSWER     | user='dua'                room=12E59992  q=5  CORRECT  pts=+150
+[2026-06-02 06:49:14] INFO     ANSWER     | user='satu'               room=12E59992  q=5  CORRECT  pts=+150
+[2026-06-02 06:49:33] INFO     ANSWER     | user='satu'               room=12E59992  q=6  WRONG    pts=+0
+[2026-06-02 06:49:35] INFO     ANSWER     | user='dua'                room=12E59992  q=6  WRONG    pts=+0
+[2026-06-02 06:49:52] INFO     ANSWER     | user='satu'               room=12E59992  q=7  CORRECT  pts=+200
+[2026-06-02 06:49:54] INFO     ANSWER     | user='dua'                room=12E59992  q=7  CORRECT  pts=+200
+[2026-06-02 06:50:08] INFO     ANSWER     | user='dua'                room=12E59992  q=8  CORRECT  pts=+150
+[2026-06-02 06:50:10] INFO     ANSWER     | user='satu'               room=12E59992  q=8  CORRECT  pts=+150
+[2026-06-02 06:50:32] INFO     ANSWER     | user='satu'               room=12E59992  q=9  WRONG    pts=+0
+[2026-06-02 06:50:33] INFO     ANSWER     | user='dua'                room=12E59992  q=9  WRONG    pts=+0
+[2026-06-02 06:50:36] INFO     GAME_OVER  | room=12E59992  winner='satu'  scores={'satu': 600, 'dua': 500}
+[2026-06-02 06:50:55] INFO     DISCONNECT | user='satu'               addr=
+[2026-06-02 06:50:55] INFO     DISCONNECT | user='satu'               addr=('127.0.0.1', 58752)
+[2026-06-02 06:50:57] INFO     DISCONNECT | user='dua'                addr=
+[2026-06-02 06:50:57] INFO     DISCONNECT | user='dua'                addr=('127.0.0.1', 34648)
+[2026-06-02 07:14:19] INFO     Server shutting down.

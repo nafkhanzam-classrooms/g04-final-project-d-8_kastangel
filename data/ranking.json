@@ -1,0 +1,38 @@
+{
+  "yukakeren": {
+    "username": "yukakeren",
+    "wins": 0,
+    "losses": 0,
+    "draws": 0,
+    "total_games": 0,
+    "total_score": 0,
+    "elo": 1000
+  },
+  "ata": {
+    "username": "ata",
+    "wins": 0,
+    "losses": 0,
+    "draws": 0,
+    "total_games": 0,
+    "total_score": 0,
+    "elo": 1000
+  },
+  "satu": {
+    "username": "satu",
+    "wins": 1,
+    "losses": 0,
+    "draws": 0,
+    "total_games": 1,
+    "total_score": 600,
+    "elo": 1016
+  },
+  "dua": {
+    "username": "dua",
+    "wins": 0,
+    "losses": 1,
+    "draws": 0,
+    "total_games": 1,
+    "total_score": 500,
+    "elo": 984
+  }
+}

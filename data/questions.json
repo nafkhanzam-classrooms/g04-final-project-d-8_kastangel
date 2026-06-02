@@ -1,0 +1,262 @@
+[
+  {
+    "id": 1,
+    "category": "Python",
+    "question": "Apa output dari: print(type([]))?",
+    "choices": {
+      "A": "<class 'list'>",
+      "B": "<class 'array'>",
+      "C": "list",
+      "D": "array"
+    },
+    "answer": "A",
+    "points": 100
+  },
+  {
+    "id": 2,
+    "category": "Python",
+    "question": "Manakah yang merupakan cara yang benar untuk mendefinisikan fungsi di Python?",
+    "choices": {
+      "A": "function myFunc():",
+      "B": "def myFunc():",
+      "C": "func myFunc():",
+      "D": "define myFunc():"
+    },
+    "answer": "B",
+    "points": 100
+  },
+  {
+    "id": 3,
+    "category": "Python",
+    "question": "Apa hasil dari: len('Hello World')?",
+    "choices": {
+      "A": "10",
+      "B": "11",
+      "C": "12",
+      "D": "9"
+    },
+    "answer": "B",
+    "points": 100
+  },
+  {
+    "id": 4,
+    "category": "Python",
+    "question": "Tipe data apa yang digunakan untuk menyimpan pasangan key-value di Python?",
+    "choices": {
+      "A": "list",
+      "B": "tuple",
+      "C": "set",
+      "D": "dict"
+    },
+    "answer": "D",
+    "points": 100
+  },
+  {
+    "id": 5,
+    "category": "Python",
+    "question": "Apa output dari: print(2 ** 3)?",
+    "choices": {
+      "A": "6",
+      "B": "8",
+      "C": "9",
+      "D": "5"
+    },
+    "answer": "B",
+    "points": 100
+  },
+  {
+    "id": 6,
+    "category": "Networking",
+    "question": "Protokol apa yang menjamin pengiriman data secara berurutan dan reliable?",
+    "choices": {
+      "A": "UDP",
+      "B": "ICMP",
+      "C": "TCP",
+      "D": "ARP"
+    },
+    "answer": "C",
+    "points": 150
+  },
+  {
+    "id": 7,
+    "category": "Networking",
+    "question": "Berapa nomor port standar untuk HTTP?",
+    "choices": {
+      "A": "443",
+      "B": "21",
+      "C": "80",
+      "D": "22"
+    },
+    "answer": "C",
+    "points": 150
+  },
+  {
+    "id": 8,
+    "category": "Networking",
+    "question": "Apa kepanjangan dari DNS?",
+    "choices": {
+      "A": "Data Network System",
+      "B": "Domain Name System",
+      "C": "Digital Name Server",
+      "D": "Dynamic Network Service"
+    },
+    "answer": "B",
+    "points": 150
+  },
+  {
+    "id": 9,
+    "category": "Networking",
+    "question": "Model OSI terdiri dari berapa layer?",
+    "choices": {
+      "A": "5",
+      "B": "6",
+      "C": "7",
+      "D": "8"
+    },
+    "answer": "C",
+    "points": 150
+  },
+  {
+    "id": 10,
+    "category": "Networking",
+    "question": "Socket programming menggunakan fungsi apa untuk menerima koneksi masuk?",
+    "choices": {
+      "A": "connect()",
+      "B": "bind()",
+      "C": "listen()",
+      "D": "accept()"
+    },
+    "answer": "D",
+    "points": 150
+  },
+  {
+    "id": 11,
+    "category": "Data Structures",
+    "question": "Struktur data mana yang menggunakan prinsip FIFO?",
+    "choices": {
+      "A": "Stack",
+      "B": "Queue",
+      "C": "Tree",
+      "D": "Heap"
+    },
+    "answer": "B",
+    "points": 200
+  },
+  {
+    "id": 12,
+    "category": "Data Structures",
+    "question": "Big-O notation untuk pencarian binary search adalah?",
+    "choices": {
+      "A": "O(n)",
+      "B": "O(n²)",
+      "C": "O(log n)",
+      "D": "O(1)"
+    },
+    "answer": "C",
+    "points": 200
+  },
+  {
+    "id": 13,
+    "category": "Data Structures",
+    "question": "Manakah algoritma sorting dengan kompleksitas rata-rata O(n log n)?",
+    "choices": {
+      "A": "Bubble Sort",
+      "B": "Insertion Sort",
+      "C": "Merge Sort",
+      "D": "Selection Sort"
+    },
+    "answer": "C",
+    "points": 200
+  },
+  {
+    "id": 14,
+    "category": "OOP",
+    "question": "Konsep OOP yang memungkinkan sebuah class mewarisi sifat dari class lain disebut?",
+    "choices": {
+      "A": "Encapsulation",
+      "B": "Polymorphism",
+      "C": "Abstraction",
+      "D": "Inheritance"
+    },
+    "answer": "D",
+    "points": 150
+  },
+  {
+    "id": 15,
+    "category": "OOP",
+    "question": "Method khusus di Python yang dipanggil saat objek dibuat adalah?",
+    "choices": {
+      "A": "__start__",
+      "B": "__init__",
+      "C": "__new__",
+      "D": "__create__"
+    },
+    "answer": "B",
+    "points": 150
+  },
+  {
+    "id": 16,
+    "category": "Python",
+    "question": "Apa yang dikembalikan oleh list.pop() tanpa argumen?",
+    "choices": {
+      "A": "Elemen pertama",
+      "B": "Elemen terakhir",
+      "C": "Elemen tengah",
+      "D": "None"
+    },
+    "answer": "B",
+    "points": 100
+  },
+  {
+    "id": 17,
+    "category": "Networking",
+    "question": "Apa fungsi dari perintah socket.bind()?",
+    "choices": {
+      "A": "Membuka koneksi ke server",
+      "B": "Menutup socket",
+      "C": "Mengikat socket ke alamat IP dan port",
+      "D": "Menerima data"
+    },
+    "answer": "C",
+    "points": 150
+  },
+  {
+    "id": 18,
+    "category": "Python",
+    "question": "Manakah cara yang benar untuk membuka file di Python dalam mode baca?",
+    "choices": {
+      "A": "open('file.txt', 'w')",
+      "B": "open('file.txt', 'r')",
+      "C": "open('file.txt', 'a')",
+      "D": "open('file.txt', 'x')"
+    },
+    "answer": "B",
+    "points": 100
+  },
+  {
+    "id": 19,
+    "category": "Networking",
+    "question": "Berapa byte header minimal dari sebuah paket UDP?",
+    "choices": {
+      "A": "20 byte",
+      "B": "8 byte",
+      "C": "16 byte",
+      "D": "4 byte"
+    },
+    "answer": "B",
+    "points": 150
+  },
+  {
+    "id": 20,
+    "category": "Data Structures",
+    "question": "Operasi push dan pop pada Stack memiliki kompleksitas?",
+    "choices": {
+      "A": "O(n)",
+      "B": "O(log n)",
+      "C": "O(n²)",
+      "D": "O(1)"
+    },
+    "answer": "D",
+    "points": 200
+  }
+]

@@ -1,7 +1,6 @@
-# Duels — Multiplayer Programming Quiz Duel
+# Duels - Multiplayer Programming Quiz Duel
 
-**Kelompok G04 · Final Project D-8 Kastangel**  
-Pemrograman Jaringan — Teknik Informatika ITS 2026
+![Gameplay UI](image.png)
 
 ---
 
@@ -19,10 +18,6 @@ Pemrograman Jaringan — Teknik Informatika ITS 2026
 
 ---
 
-![Gameplay UI](image.png)
-
-![Replay UI](image-1.png)
----
 
 ## 1. Pendahuluan
 

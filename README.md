@@ -1,6 +1,8 @@
 # Duels - Multiplayer Programming Quiz Duel
 
-![Gameplay UI](image.png)
+## Link Youtube Demo
+
+[Youtube Demo](https://youtu.be/YUr06tzEdZs)
 
 ---
 
@@ -56,6 +58,8 @@ Sistem ini diimplementasikan sepenuhnya dalam bahasa **Python** (backend) dan **
 
 ### 2.3 Fitur Lengkap
 
+![Gameplay UI](image.png)
+
 **Fitur Inti:**
 - Real-time game state synchronization
 - Timer soal server-side (authoritative)
@@ -64,6 +68,8 @@ Sistem ini diimplementasikan sepenuhnya dalam bahasa **Python** (backend) dan **
 - Ping/latency indicator (PING/PONG)
 - Anti-invalid packet + rate limiting (maks 5 submit/2 detik)
 - Activity logging server-side dan client-side
+
+![Replay UI](image-1.png)
 
 **Fitur Bonus:**
 - **Dedicated Game Server** — TCP server terpisah, thread-per-client

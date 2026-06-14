@@ -208,15 +208,24 @@
   },
   "1": {
     "username": "1",
-    "wins": 0,
+    "wins": 1,
     "losses": 0,
     "draws": 0,
-    "total_games": 0,
-    "total_score": 0,
-    "elo": 1000
+    "total_games": 1,
+    "total_score": 800,
+    "elo": 1016
   },
   "2": {
     "username": "2",
+    "wins": 0,
+    "losses": 1,
+    "draws": 0,
+    "total_games": 1,
+    "total_score": 550,
+    "elo": 984
+  },
+  "zahran": {
+    "username": "zahran",
     "wins": 0,
     "losses": 0,
     "draws": 0,

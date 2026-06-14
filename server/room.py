@@ -1,5 +1,5 @@
 """
-room.py - Room and session management for CodeDuel.
+room.py - Room and session management for Duels.
 """
 
 import threading
@@ -52,20 +52,27 @@ class Room:
             self.players[username] = handler
             return True
 
-    def remove_player(self, username: str):
-        """Mark a player as disconnected (not immediately removed for reconnect)."""
+    def remove_player(self, username: str, handler=None) -> bool:
+        """Mark a player as disconnected. Returns True if actually disconnected."""
         with self._lock:
             if username in self.players:
+                if handler and self.players[username] != handler:
+                    return False
                 self.disconnected[username] = time.time()
                 # Keep slot but remove live handler reference
                 del self.players[username]
                 if self.game:
                     self.game.replay.record_disconnect(username)
-        logger.log_disconnect(username, "")
+                logger.log_disconnect(username, "")
+                return True
+        return False
 
     def reconnect_player(self, username: str, handler: "ClientHandler") -> bool:
         """Reconnect a previously disconnected player."""
         with self._lock:
+            if username in self.players:
+                self.players[username] = handler
+                return True
             if username not in self.disconnected:
                 return False
             ts = self.disconnected[username]
@@ -191,30 +198,42 @@ class Room:
             correct  = correct,
             points   = points,
             scores   = state.scores,
+            hp       = state.hp,
         )
         self.broadcast(pkt)
 
     def _cb_game_state(self, state: GameState):
         snap = state.snapshot()
+        
+        with self._lock:
+            latencies = {
+                u: getattr(h, "latency", 0.0) for u, h in self.players.items()
+            }
+
         pkt  = protocol.make_game_state(
             room_id         = self.room_id,
             scores          = snap["scores"],
+            hp              = snap["hp"],
             question_index  = snap["question_index"],
             status          = snap["status"],
             players_answered= snap["players_answered"],
+            latencies       = latencies
         )
         self.broadcast(pkt)
 
     def _cb_game_over(self, state: GameState):
         winner = getattr(state, "_winner", None)
         loser  = getattr(state, "_loser", None)
+        reason = getattr(state, "_reason", "all_questions_done")
         scores = dict(state.scores)
+        hp     = dict(state.hp)
 
         pkt = protocol.make_game_over(
             room_id = self.room_id,
             winner  = winner,
             scores  = scores,
-            reason  = "all_questions_done",
+            hp      = hp,
+            reason  = reason,
         )
         self.broadcast(pkt)
 

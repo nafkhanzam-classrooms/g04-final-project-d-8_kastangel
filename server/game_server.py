@@ -1,5 +1,5 @@
 """
-game_server.py - Dedicated TCP game server for CodeDuel.
+game_server.py - Dedicated TCP game server for Duels.
 
 Each client connection is handled in a dedicated thread.
 The server validates all incoming packets and dispatches them
@@ -18,8 +18,12 @@ from .protocol import PacketType, validate, encode, decode
 from .replay import load_replay
 from .room import get_room, list_rooms, Room
 
-BUFFER_SIZE = 4096
+BUFFER_SIZE  = 4096
 RECV_TIMEOUT = 120  # seconds; after this the connection is closed
+
+# Rate limiting for SUBMIT_ANSWER
+RATE_LIMIT_WINDOW = 2.0   # seconds
+RATE_LIMIT_MAX    = 5     # max submits within the window
 
 
 class ClientHandler(threading.Thread):
@@ -41,6 +45,10 @@ class ClientHandler(threading.Thread):
         self.is_spectator = False
         self._send_lock = threading.Lock()
         self._running   = True
+        self.latency    = 0.0
+
+        # Rate limiting state
+        self._answer_times: list[float] = []
 
     # ------------------------------------------------------------------
     # Send / receive
@@ -129,14 +137,16 @@ class ClientHandler(threading.Thread):
             return
 
         dispatch = {
-            PacketType.MATCHMAKE:     self._handle_matchmake,
-            PacketType.JOIN_ROOM:     self._handle_join_room,
-            PacketType.SPECTATE:      self._handle_spectate,
-            PacketType.SUBMIT_ANSWER: self._handle_submit_answer,
-            PacketType.PING:          self._handle_ping,
-            PacketType.PONG:          self._handle_pong,
-            PacketType.GET_REPLAY:    self._handle_get_replay,
-            PacketType.DISCONNECT:    self._handle_client_disconnect,
+            PacketType.MATCHMAKE:        self._handle_matchmake,
+            PacketType.CANCEL_MATCHMAKE: self._handle_cancel_matchmake,
+            PacketType.JOIN_ROOM:        self._handle_join_room,
+            PacketType.SPECTATE:         self._handle_spectate,
+            PacketType.SUBMIT_ANSWER:    self._handle_submit_answer,
+            PacketType.PING:             self._handle_ping,
+            PacketType.PONG:             self._handle_pong,
+            PacketType.GET_REPLAY:       self._handle_get_replay,
+            PacketType.DISCONNECT:       self._handle_client_disconnect,
+            PacketType.VOICE_SIGNAL:     self._handle_voice_signal,
         }
 
         handler = dispatch.get(ptype)
@@ -157,8 +167,7 @@ class ClientHandler(threading.Thread):
 
         # Check duplicate in active sessions
         if self.server.is_logged_in(username):
-            self.send(protocol.make_login_fail("Username already in use"))
-            return
+            self.server.kick_user(username)
 
         self.username = username
         token = f"{username}-{int(time.time())}"
@@ -169,9 +178,22 @@ class ClientHandler(threading.Thread):
 
     def _handle_matchmake(self, pkt: dict):
         if self.room:
-            self.send(protocol.make_error("Already in a room"))
-            return
+            if not getattr(self.room, "_finished", False) and not self.is_spectator:
+                self.send(protocol.make_error("Already in an active room"))
+                return
+            # Leave previous room
+            if self.is_spectator:
+                self.room.remove_spectator(self)
+                self.is_spectator = False
+            else:
+                self.room.remove_player(self.username)
+            self.room = None
+            
         get_queue().enqueue(self.username, self)
+
+    def _handle_cancel_matchmake(self, pkt: dict):
+        get_queue().dequeue(self.username)
+        logger.log_info(f"{self.username} cancelled matchmaking")
 
     def _handle_join_room(self, pkt: dict):
         room_id = pkt["room_id"]
@@ -213,12 +235,27 @@ class ClientHandler(threading.Thread):
         logger.log_spectate(self.username, room_id)
 
         snap = room.game.snapshot() if room.game else {}
+        if room.game:
+            with room._lock:
+                snap["latencies"] = {
+                    u: getattr(h, "latency", 0.0) for u, h in room.players.items()
+                }
         self.send(protocol.make_spectate_ok(room_id, snap))
 
     def _handle_submit_answer(self, pkt: dict):
         if not self.room or not self.room.game:
             self.send(protocol.make_error("Not in an active game"))
             return
+
+        # Rate limiting
+        now = time.time()
+        self._answer_times = [t for t in self._answer_times
+                               if now - t < RATE_LIMIT_WINDOW]
+        if len(self._answer_times) >= RATE_LIMIT_MAX:
+            self.send(protocol.make_error("Rate limit exceeded — slow down!"))
+            logger.log_info(f"Rate limit hit by {self.username}")
+            return
+        self._answer_times.append(now)
 
         accepted = self.room.game.submit_answer(
             self.username, pkt["question_index"], pkt["answer"]
@@ -227,6 +264,7 @@ class ClientHandler(threading.Thread):
             self.send(protocol.make_error("Answer rejected"))
 
     def _handle_ping(self, pkt: dict):
+        self.latency = float(pkt.get("latency", 0.0))
         # Server replies with PONG carrying the client's timestamp
         self.send(protocol.make_pong(self.username, pkt.get("ts", time.time())))
 
@@ -245,7 +283,7 @@ class ClientHandler(threading.Thread):
         if not room:
             self.send(protocol.make_reconnect_fail("Room not found"))
             return
-        if not room.is_player_disconnected(username):
+        if not room.has_player(username):
             self.send(protocol.make_reconnect_fail("No pending reconnect for this player"))
             return
 
@@ -259,6 +297,11 @@ class ClientHandler(threading.Thread):
         self.server.register(self)
 
         snap = room.game.snapshot() if room.game else {}
+        if room.game:
+            with room._lock:
+                snap["latencies"] = {
+                    u: getattr(h, "latency", 0.0) for u, h in room.players.items()
+                }
         self.send(protocol.make_reconnect_ok(room_id, snap))
         # Notify other players
         room.broadcast(
@@ -284,6 +327,19 @@ class ClientHandler(threading.Thread):
     def _handle_client_disconnect(self, pkt: dict):
         self._running = False
 
+    def _handle_voice_signal(self, pkt: dict):
+        """Relay a WebRTC signaling packet to all other room members."""
+        if not self.room:
+            self.send(protocol.make_error("Not in a room"))
+            return
+        relay = protocol.make_voice_signal(
+            from_user   = self.username,
+            signal_type = pkt["signal_type"],
+            data        = pkt["data"],
+        )
+        # Broadcast to everyone except the sender
+        self.room.broadcast(relay, exclude=self.username)
+
     # ------------------------------------------------------------------
     # Cleanup
     # ------------------------------------------------------------------
@@ -302,9 +358,9 @@ class ClientHandler(threading.Thread):
             if self.is_spectator:
                 self.room.remove_spectator(self)
             else:
-                self.room.remove_player(self.username)
+                removed = self.room.remove_player(self.username, self)
                 # If game is ongoing, notify others
-                if self.room.game and self.room.game.status.name not in ("GAME_OVER",):
+                if removed and self.room.game and self.room.game.status.name not in ("GAME_OVER",):
                     self.room.broadcast(
                         {"type": "PLAYER_DISCONNECTED", "username": self.username},
                         exclude=self.username
@@ -336,6 +392,14 @@ class GameServer:
         with self._sessions_lock:
             return username in self._sessions
 
+    def kick_user(self, username: str):
+        with self._sessions_lock:
+            handler = self._sessions.get(username)
+            if handler:
+                handler.send(protocol.make_error("Logged in from another location"))
+                handler._running = False
+                del self._sessions[username]
+
     def register(self, handler: ClientHandler):
         with self._sessions_lock:
             self._sessions[handler.username] = handler
@@ -355,7 +419,7 @@ class GameServer:
         sock.bind((self.host, self.port))
         sock.listen(50)
 
-        logger.log_info(f"CodeDuel server listening on {self.host}:{self.port}")
+        logger.log_info(f"Duels server listening on {self.host}:{self.port}")
 
         try:
             while True:

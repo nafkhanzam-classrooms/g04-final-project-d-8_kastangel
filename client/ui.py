@@ -75,8 +75,9 @@ class CodeDuelUI:
         self._current_q: Optional[dict] = None
         self._q_index    = 0
         self._q_total    = 0
-        self._answered   = False
-        self._time_limit = 20
+        self._answered        = False
+        self._question_locked = False   # True once any player answers correctly
+        self._time_limit      = 20
         self._q_received_at = 0.0
         self._room_id    = ""
         self._players: list[str] = []
@@ -229,9 +230,13 @@ class CodeDuelUI:
         Blocking input loop for the active match.
         Runs in the main thread so there's no stdin conflict with the menu.
         Returns when the game ends (state leaves IN_GAME).
+
+        Cerdas cermat rules:
+        - A player may answer multiple times until they get it right.
+        - Once any player answers correctly the question is locked for everyone.
         """
         while self._state == "IN_GAME":
-            if self._current_q and not self._answered:
+            if self._current_q and not self._answered and not self._question_locked:
                 self._print_question()
                 try:
                     ans = _input("Your answer [A/B/C/D]: ").upper()
@@ -239,14 +244,14 @@ class CodeDuelUI:
                     break
                 if ans in ("A", "B", "C", "D"):
                     self.client.submit_answer(self._q_index, ans)
-                    self._answered = True
+                    self._answered = True   # temporarily block until server replies
                     print(f"{C.DIM}Answer submitted. Waiting for result...{C.RESET}")
                 elif ans == "Q":
                     break
                 else:
                     print(f"{C.RED}Invalid choice. Use A, B, C, or D.{C.RESET}")
             else:
-                # Waiting for next question or game over
+                # Waiting for next question, result, or game over
                 time.sleep(0.2)
 
     # ------------------------------------------------------------------
@@ -368,13 +373,14 @@ class CodeDuelUI:
         self._event.set()
 
     def on_question(self, pkt: dict):
-        self._q_index       = pkt.get("index", 0)
-        self._q_total       = pkt.get("total", self._q_total)
-        self._current_q     = pkt.get("question", {})
-        self._time_limit    = pkt.get("time_limit", 20)
-        self._q_received_at = time.time()
-        self._answered      = False
-        self._state         = "IN_GAME"
+        self._q_index         = pkt.get("index", 0)
+        self._q_total         = pkt.get("total", self._q_total)
+        self._current_q       = pkt.get("question", {})
+        self._time_limit      = pkt.get("time_limit", 20)
+        self._q_received_at   = time.time()
+        self._answered        = False
+        self._question_locked = False
+        self._state           = "IN_GAME"
         self._timer_stop.set()
         self._start_question_timer()
         # The game input loop will detect the new question and print it
@@ -387,12 +393,19 @@ class CodeDuelUI:
 
         if username == self.client.username:
             if correct:
+                self._question_locked = True
                 print(f"\n  {C.BG_GREEN}{C.BOLD} ✓ CORRECT! +{points} pts {C.RESET}")
             else:
-                print(f"\n  {C.BG_RED}{C.BOLD} ✗ WRONG! {C.RESET}")
+                # Wrong — allow retry
+                self._answered = False
+                print(f"\n  {C.BG_RED}{C.BOLD} ✗ WRONG! Try again...{C.RESET}")
         else:
             mark = "✓" if correct else "✗"
-            print(f"\n  {C.DIM}{username} answered: {mark} ({'+' if correct else ''}{points}){C.RESET}")
+            if correct:
+                self._question_locked = True
+                print(f"\n  {C.DIM}{username} answered correctly! Question locked.{C.RESET}")
+            else:
+                print(f"\n  {C.DIM}{username} answered: {mark} (wrong){C.RESET}")
 
     def on_game_state(self, pkt: dict):
         self._scores = pkt.get("scores", self._scores)

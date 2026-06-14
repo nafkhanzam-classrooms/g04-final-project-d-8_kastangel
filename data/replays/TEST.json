@@ -4,11 +4,11 @@
     "alice",
     "bob"
   ],
-  "started_at": 1780357103.2320611,
+  "started_at": 1780941606.9066365,
   "events": [
     {
       "event": "GAME_START",
-      "ts": 1780357103.232062,
+      "ts": 1780941606.9066377,
       "elapsed": 0.0,
       "players": [
         "alice",
@@ -17,16 +17,16 @@
     },
     {
       "event": "QUESTION",
-      "ts": 1780357105.232532,
-      "elapsed": 2.0,
+      "ts": 1780941608.9073412,
+      "elapsed": 2.001,
       "index": 0,
       "question_id": 1,
       "question_text": "Q1?"
     },
     {
       "event": "ANSWER",
-      "ts": 1780357105.7324886,
-      "elapsed": 2.5,
+      "ts": 1780941609.407331,
+      "elapsed": 2.501,
       "username": "alice",
       "question_index": 0,
       "answer": "A",
@@ -38,22 +38,8 @@
       }
     },
     {
-      "event": "ANSWER",
-      "ts": 1780357105.7328014,
-      "elapsed": 2.501,
-      "username": "bob",
-      "question_index": 0,
-      "answer": "D",
-      "correct": false,
-      "points": 0,
-      "scores": {
-        "alice": 100,
-        "bob": 0
-      }
-    },
-    {
       "event": "QUESTION",
-      "ts": 1780357108.733724,
+      "ts": 1780941612.4085553,
       "elapsed": 5.502,
       "index": 1,
       "question_id": 2,
@@ -61,7 +47,7 @@
     },
     {
       "event": "ANSWER",
-      "ts": 1780357109.2336822,
+      "ts": 1780941612.9087024,
       "elapsed": 6.002,
       "username": "alice",
       "question_index": 1,
@@ -74,22 +60,8 @@
       }
     },
     {
-      "event": "ANSWER",
-      "ts": 1780357109.2339928,
-      "elapsed": 6.002,
-      "username": "bob",
-      "question_index": 1,
-      "answer": "D",
-      "correct": false,
-      "points": 0,
-      "scores": {
-        "alice": 200,
-        "bob": 0
-      }
-    },
-    {
       "event": "GAME_OVER",
-      "ts": 1780357112.2345796,
+      "ts": 1780941615.9096944,
       "elapsed": 9.003,
       "winner": "alice",
       "scores": {

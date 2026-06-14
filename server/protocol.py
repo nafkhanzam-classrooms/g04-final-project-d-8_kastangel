@@ -1,5 +1,5 @@
 """
-protocol.py - Packet definitions, validation, and serialization for CodeDuel.
+protocol.py - Packet definitions, validation, and serialization for Duels.
 
 All packets are newline-delimited JSON objects transmitted over TCP.
 """
@@ -21,6 +21,7 @@ class PacketType:
 
     # Matchmaking
     MATCHMAKE       = "MATCHMAKE"
+    CANCEL_MATCHMAKE = "CANCEL_MATCHMAKE"
     MATCHED         = "MATCHED"
 
     # Room
@@ -62,24 +63,29 @@ class PacketType:
     ERROR           = "ERROR"
     INVALID_PACKET  = "INVALID_PACKET"
 
+    # Voice chat (WebRTC signaling relay)
+    VOICE_SIGNAL    = "VOICE_SIGNAL"
+
 
 # ---------------------------------------------------------------------------
 # Required fields per packet type (anti-invalid-packet validation)
 # ---------------------------------------------------------------------------
 
 REQUIRED_FIELDS: dict[str, list[str]] = {
-    PacketType.LOGIN:           ["username"],
-    PacketType.MATCHMAKE:       ["username"],
-    PacketType.JOIN_ROOM:       ["username", "room_id"],
-    PacketType.SPECTATE:        ["username", "room_id"],
-    PacketType.SUBMIT_ANSWER:   ["username", "room_id", "question_index", "answer"],
-    PacketType.PING:            ["username"],
-    PacketType.PONG:            ["username", "timestamp"],
-    PacketType.RECONNECT:       ["username", "room_id"],
-    PacketType.GET_RANKING:     [],
-    PacketType.GET_REPLAY:      ["room_id"],
-    PacketType.LIST_ROOMS:      [],
-    PacketType.DISCONNECT:      ["username"],
+    PacketType.LOGIN:             ["username"],
+    PacketType.MATCHMAKE:         ["username"],
+    PacketType.CANCEL_MATCHMAKE:  ["username"],
+    PacketType.JOIN_ROOM:         ["username", "room_id"],
+    PacketType.SPECTATE:          ["username", "room_id"],
+    PacketType.SUBMIT_ANSWER:     ["username", "room_id", "question_index", "answer"],
+    PacketType.PING:              ["username"],
+    PacketType.PONG:              ["username", "timestamp"],
+    PacketType.RECONNECT:         ["username", "room_id"],
+    PacketType.GET_RANKING:       [],
+    PacketType.GET_REPLAY:        ["room_id"],
+    PacketType.LIST_ROOMS:        [],
+    PacketType.DISCONNECT:        ["username"],
+    PacketType.VOICE_SIGNAL:      ["username", "room_id", "signal_type", "data"],
 }
 
 
@@ -122,22 +128,22 @@ def make_question(room_id: str, index: int, total: int, question: dict,
 
 
 def make_answer_result(room_id: str, username: str, correct: bool,
-                       points: int, scores: dict) -> dict:
+                       points: int, scores: dict, hp: dict) -> dict:
     return _make(PacketType.ANSWER_RESULT, room_id=room_id, username=username,
-                 correct=correct, points=points, scores=scores)
+                 correct=correct, points=points, scores=scores, hp=hp)
 
 
-def make_game_state(room_id: str, scores: dict, question_index: int,
-                    status: str, players_answered: list) -> dict:
-    return _make(PacketType.GAME_STATE, room_id=room_id, scores=scores,
+def make_game_state(room_id: str, scores: dict, hp: dict, question_index: int,
+                    status: str, players_answered: list, latencies: dict = None) -> dict:
+    return _make(PacketType.GAME_STATE, room_id=room_id, scores=scores, hp=hp,
                  question_index=question_index, status=status,
-                 players_answered=players_answered)
+                 players_answered=players_answered, latencies=latencies or {})
 
 
-def make_game_over(room_id: str, winner: Optional[str], scores: dict,
+def make_game_over(room_id: str, winner: Optional[str], scores: dict, hp: dict,
                    reason: str = "all_questions_done") -> dict:
     return _make(PacketType.GAME_OVER, room_id=room_id, winner=winner,
-                 scores=scores, reason=reason)
+                 scores=scores, hp=hp, reason=reason)
 
 
 def make_pong(username: str, client_timestamp: float) -> dict:
@@ -178,6 +184,11 @@ def make_spectate_ok(room_id: str, game_state: dict) -> dict:
 
 def make_spectate_fail(reason: str) -> dict:
     return _make(PacketType.SPECTATE_FAIL, reason=reason)
+
+
+def make_voice_signal(from_user: str, signal_type: str, data) -> dict:
+    return _make(PacketType.VOICE_SIGNAL,
+                 from_user=from_user, signal_type=signal_type, data=data)
 
 
 # ---------------------------------------------------------------------------

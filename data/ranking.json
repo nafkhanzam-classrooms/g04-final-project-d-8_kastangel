@@ -10,21 +10,21 @@
   },
   "ata": {
     "username": "ata",
-    "wins": 0,
+    "wins": 2,
     "losses": 0,
     "draws": 0,
-    "total_games": 0,
-    "total_score": 0,
-    "elo": 1000
+    "total_games": 2,
+    "total_score": 1600,
+    "elo": 1033
   },
   "satu": {
     "username": "satu",
     "wins": 1,
-    "losses": 0,
+    "losses": 1,
     "draws": 0,
-    "total_games": 1,
-    "total_score": 600,
-    "elo": 1016
+    "total_games": 2,
+    "total_score": 1350,
+    "elo": 999
   },
   "dua": {
     "username": "dua",
@@ -34,5 +34,176 @@
     "total_games": 1,
     "total_score": 500,
     "elo": 984
+  },
+  "ichi": {
+    "username": "ichi",
+    "wins": 0,
+    "losses": 0,
+    "draws": 2,
+    "total_games": 2,
+    "total_score": 100,
+    "elo": 1000
+  },
+  "nii": {
+    "username": "nii",
+    "wins": 0,
+    "losses": 0,
+    "draws": 2,
+    "total_games": 2,
+    "total_score": 100,
+    "elo": 1000
+  },
+  "Ata": {
+    "username": "Ata",
+    "wins": 1,
+    "losses": 1,
+    "draws": 0,
+    "total_games": 2,
+    "total_score": 1850,
+    "elo": 1001
+  },
+  "Yuka": {
+    "username": "Yuka",
+    "wins": 1,
+    "losses": 2,
+    "draws": 0,
+    "total_games": 3,
+    "total_score": 1500,
+    "elo": 983
+  },
+  "yuka": {
+    "username": "yuka",
+    "wins": 0,
+    "losses": 0,
+    "draws": 0,
+    "total_games": 0,
+    "total_score": 0,
+    "elo": 1000
+  },
+  "ATA": {
+    "username": "ATA",
+    "wins": 0,
+    "losses": 0,
+    "draws": 0,
+    "total_games": 0,
+    "total_score": 0,
+    "elo": 1000
+  },
+  "1234": {
+    "username": "1234",
+    "wins": 0,
+    "losses": 0,
+    "draws": 0,
+    "total_games": 0,
+    "total_score": 0,
+    "elo": 1000
+  },
+  "123": {
+    "username": "123",
+    "wins": 0,
+    "losses": 0,
+    "draws": 0,
+    "total_games": 0,
+    "total_score": 0,
+    "elo": 1000
+  },
+  "Dzaky": {
+    "username": "Dzaky",
+    "wins": 0,
+    "losses": 0,
+    "draws": 0,
+    "total_games": 0,
+    "total_score": 0,
+    "elo": 1000
+  },
+  "Tets": {
+    "username": "Tets",
+    "wins": 0,
+    "losses": 0,
+    "draws": 0,
+    "total_games": 0,
+    "total_score": 0,
+    "elo": 1000
+  },
+  "212": {
+    "username": "212",
+    "wins": 0,
+    "losses": 0,
+    "draws": 0,
+    "total_games": 0,
+    "total_score": 0,
+    "elo": 1000
+  },
+  "1234567890": {
+    "username": "1234567890",
+    "wins": 0,
+    "losses": 0,
+    "draws": 0,
+    "total_games": 0,
+    "total_score": 0,
+    "elo": 1000
+  },
+  "test": {
+    "username": "test",
+    "wins": 0,
+    "losses": 0,
+    "draws": 0,
+    "total_games": 0,
+    "total_score": 0,
+    "elo": 1000
+  },
+  "yy": {
+    "username": "yy",
+    "wins": 0,
+    "losses": 0,
+    "draws": 0,
+    "total_games": 0,
+    "total_score": 0,
+    "elo": 1000
+  },
+  "saty": {
+    "username": "saty",
+    "wins": 0,
+    "losses": 0,
+    "draws": 0,
+    "total_games": 0,
+    "total_score": 0,
+    "elo": 1000
+  },
+  "debugtest": {
+    "username": "debugtest",
+    "wins": 0,
+    "losses": 0,
+    "draws": 0,
+    "total_games": 0,
+    "total_score": 0,
+    "elo": 1000
+  },
+  "Person1": {
+    "username": "Person1",
+    "wins": 0,
+    "losses": 0,
+    "draws": 0,
+    "total_games": 0,
+    "total_score": 0,
+    "elo": 1000
+  },
+  "Person2": {
+    "username": "Person2",
+    "wins": 0,
+    "losses": 0,
+    "draws": 0,
+    "total_games": 0,
+    "total_score": 0,
+    "elo": 1000
+  },
+  "Person3": {
+    "username": "Person3",
+    "wins": 0,
+    "losses": 0,
+    "draws": 0,
+    "total_games": 0,
+    "total_score": 0,
+    "elo": 1000
   }
 }

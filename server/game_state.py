@@ -121,7 +121,8 @@ class GameState:
             self.answered[username] = answer  # record latest answer
 
             self.replay.record_answer(
-                username, q_index, answer, correct, points, dict(self.scores)
+                username, q_index, answer, correct, points, dict(self.scores),
+                q["answer"].upper()
             )
 
             should_advance = correct

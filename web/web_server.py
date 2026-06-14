@@ -187,6 +187,14 @@ class QuietHandler(SimpleHTTPRequestHandler):
     def log_message(self, format, *args):
         pass  # suppress access logs
 
+    def handle(self):
+        try:
+            super().handle()
+        except ConnectionResetError:
+            pass  # Suppress harmless "Connection reset by peer" errors
+        except BrokenPipeError:
+            pass  # Suppress harmless "Broken pipe" errors
+
 
 def run_http_server(port: int):
     os.makedirs(WEB_DIR, exist_ok=True)

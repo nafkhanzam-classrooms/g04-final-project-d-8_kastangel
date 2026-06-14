@@ -19,6 +19,11 @@ Pemrograman Jaringan — Teknik Informatika ITS 2026
 
 ---
 
+![Gameplay UI](image.png)
+
+![Replay UI](image-1.png)
+---
+
 ## 1. Pendahuluan
 
 Pemrograman jaringan merupakan salah satu mata kuliah inti dalam kurikulum Teknik Informatika yang menuntut mahasiswa untuk merancang dan mengimplementasikan sistem komunikasi berbasis socket secara nyata. Sebagai bagian dari final project, kelompok G04 merancang **Duels** — sebuah platform permainan kuis pemrograman multipemain berbasis jaringan yang beroperasi secara *real-time*.

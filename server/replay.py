@@ -36,9 +36,10 @@ class ReplayRecorder:
                      question_text=question_text)
 
     def record_answer(self, username: str, question_index: int, answer: str,
-                      correct: bool, points: int, scores: dict):
+                      correct: bool, points: int, scores: dict, correct_answer: str):
         self._record("ANSWER", username=username, question_index=question_index,
-                     answer=answer, correct=correct, points=points, scores=scores)
+                     answer=answer, correct=correct, points=points, scores=scores,
+                     correct_answer=correct_answer)
 
     def record_timeout(self, question_index: int):
         self._record("TIMEOUT", question_index=question_index)

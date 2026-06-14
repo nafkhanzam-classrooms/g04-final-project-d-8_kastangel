@@ -1146,48 +1146,50 @@ function onReplay(pkt) {
     let totalQuestions = 0;
 
     const rows = events.map(ev => {
-      // Use nullish coalescing to avoid falsy-0 bug
-      const elapsedNum = ev.elapsed ?? 0;
-      const elapsed = `${elapsedNum.toFixed(1)}s`;
-      const etypeText = _escHtml(ev.event);
-      // Normalise event type to CSS class (underscores → hyphens)
-      const typeClass = String(ev.event).toLowerCase().replace(/_/g, '-');
+      // Format timestamp to [YYYY-MM-DD HH:mm:ss]
+      const d = new Date((ev.ts || Date.now() / 1000) * 1000);
+      const yyyy = d.getFullYear();
+      const mm = String(d.getMonth() + 1).padStart(2, '0');
+      const dd = String(d.getDate()).padStart(2, '0');
+      const hh = String(d.getHours()).padStart(2, '0');
+      const mn = String(d.getMinutes()).padStart(2, '0');
+      const ss = String(d.getSeconds()).padStart(2, '0');
+      const timeStr = `[${yyyy}-${mm}-${dd} ${hh}:${mn}:${ss}]`;
+
+      const etype = String(ev.event).toUpperCase().padEnd(10, ' ');
       let detailText = '';
 
       if (ev.event === 'GAME_START') {
         players = ev.players || [];
-        detailText = `Battle commenced between: <strong>${players.map(_escHtml).join(' vs ')}</strong>`;
+        detailText = `room=${roomId}  players=${players.join(', ')}`;
       } else if (ev.event === 'QUESTION') {
         totalQuestions++;
-        detailText = `Question ${(ev.index ?? 0) + 1}: &ldquo;${_escHtml(ev.question_text)}&rdquo;`;
+        detailText = `room=${roomId}  q=${ev.index ?? 0} text="${ev.question_text || ''}"`;
       } else if (ev.event === 'ANSWER') {
-        const mark = ev.correct ? '✅' : '❌';
-        const pts  = ev.points ?? 0;
-        detailText = `${_escHtml(ev.username)} answered: <strong>${_escHtml(ev.answer)}</strong> ${mark} (${pts >= 0 ? '+' : ''}${pts} pts)`;
+        const u = `user='${ev.username}'`.padEnd(25, ' ');
+        const r = `room=${roomId}`.padEnd(15, ' ');
+        const q = `q=${ev.question_index ?? 0}`.padEnd(5, ' ');
+        const c = (ev.correct ? 'CORRECT' : 'WRONG').padEnd(9, ' ');
+        const p = `pts=+${ev.points ?? 0}`;
+        detailText = `${u}  ${r} ${q} ${c} ${p}`;
       } else if (ev.event === 'TIMEOUT') {
-        detailText = `Timer expired for Question ${(ev.question_index ?? 0) + 1}`;
+        detailText = `room=${roomId}  q=${ev.question_index ?? 0}  TIMEOUT`;
       } else if (ev.event === 'GAME_OVER') {
         finalScores = ev.scores || {};
         winner = ev.winner || 'Draw';
-        detailText = `Match finished. Winner: <strong>${_escHtml(winner)}</strong>`;
+        detailText = `room=${roomId}  winner=${winner} reason=${ev.reason || 'unknown'}`;
       } else if (ev.event === 'DISCONNECT') {
-        detailText = `${_escHtml(ev.username)} disconnected`;
+        detailText = `user='${ev.username}' disconnected`;
       } else if (ev.event === 'RECONNECT') {
-        detailText = `${_escHtml(ev.username)} reconnected`;
+        detailText = `user='${ev.username}' reconnected`;
       }
 
-      return `
-        <div class="replay-event">
-          <span class="replay-ts">[+${elapsed}]</span>
-          <div class="replay-content">
-            <span class="replay-etype ${typeClass}">${etypeText}</span>
-            <span class="replay-detail">${detailText}</span>
-          </div>
-        </div>
-      `;
+      return `${timeStr} INFO     ${etype} | ${detailText}`;
     });
 
-    if (timeline) timeline.innerHTML = rows.join('');
+    const logOutput = `<div style="background:#111; color:#0f0; font-family:monospace; padding:16px; border-radius:8px; overflow-x:auto; white-space:pre; line-height:1.5;">${_escHtml(rows.join('\n'))}</div>`;
+    
+    if (timeline) timeline.innerHTML = logOutput;
 
     const vsEl = document.getElementById('replay-vs-display');
     if (vsEl) vsEl.textContent = players.join(' vs ') || 'Replay';
@@ -1242,7 +1244,7 @@ function viewCurrentReplay() {
   setTimeout(() => {
     console.log('[REPLAY] sending GET_REPLAY for', roomId);
     sendWS({ type: 'GET_REPLAY', room_id: roomId });
-  }, 500);
+  }, 1200);
 }
 
 // ── Ranking Data ───────────────────────────────────────────────
